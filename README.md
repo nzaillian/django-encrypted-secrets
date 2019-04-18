@@ -1,12 +1,10 @@
 # django-secrets
 
-Encrypted secrets for Django applications.
-
 `django-secrets` brings Rails-style [encrypted credentials](https://edgeguides.rubyonrails.org/security.html#custom-credentials) to the [Django web framework](https://www.djangoproject.com/).
 
 ## Installation
 
-To install Django Secrets, first pip install the module:
+To install `django-secrets`, first pip install the module:
 
     $ pip install django-secrets
 
