@@ -96,3 +96,6 @@ secrets.yml.enc
 master.key
 
 test_tmp/*
+
+dummy/*
+manage.py
