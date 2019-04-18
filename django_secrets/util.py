@@ -11,6 +11,11 @@ def write_secrets(message, key=secrets_conf.ENCRYPTED_SECRETS_KEY):
         encrypted_secrets_file.write(encrypted)
 
 def read_secrets(encrypted_secrets_file_path=secrets_conf.ENCRYPTED_SECRETS_PATH, key=secrets_conf.ENCRYPTED_SECRETS_KEY):
+    key_file_exists = os.path.isfile(encrypted_secrets_file_path)
+
+    if not key_file_exists:
+        return False
+
     with open(encrypted_secrets_file_path, 'r') as encrypted_secrets_file:
         message = encrypted_secrets_file.read()
         cipher = AESCipher(message, key)

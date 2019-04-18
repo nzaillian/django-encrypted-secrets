@@ -7,6 +7,8 @@ class SecretsManager():
     @staticmethod
     def load():
         secrets_yaml = read_secrets()
+        if not secrets_yaml:
+            return False
         secrets_object = load(secrets_yaml, Loader=FullLoader)
         SecretsManager.secrets = secrets_object
 
