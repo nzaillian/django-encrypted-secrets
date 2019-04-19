@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-encrypted-secrets',
-    version='0.8',
+    version='0.8.1',
     packages=find_packages(),
     author='Axiomatic LLC',
     author_email='contact@axiomatic.im',
@@ -17,7 +17,8 @@ setup(
     license='MIT License',  # example license
     description='A Django app for managing secrets.',
     long_description=README,
-    url='https://www.example.com/',
+    long_description_content_type='text/markdown',
+    url='https://github.com/nzaillian/django-encrypted-secrets',
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
