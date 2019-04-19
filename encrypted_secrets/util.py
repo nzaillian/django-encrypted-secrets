@@ -1,8 +1,8 @@
 import os
 import tempfile
 import subprocess
-import django_secrets.conf as secrets_conf
-from django_secrets.crypto.aes import AESCipher
+import encrypted_secrets.conf as secrets_conf
+from encrypted_secrets.crypto.aes import AESCipher
 
 def write_secrets(message, key=secrets_conf.ENCRYPTED_SECRETS_KEY):
     with open(secrets_conf.ENCRYPTED_SECRETS_PATH, 'w') as encrypted_secrets_file:

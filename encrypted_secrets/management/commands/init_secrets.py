@@ -2,13 +2,13 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 import os
 import secrets
-import django_secrets.conf as secrets_conf
-from django_secrets.util import write_secrets
+import encrypted_secrets.conf as secrets_conf
+from encrypted_secrets.util import write_secrets
 
 ENCRYPTED_SECRETS_PATH = secrets_conf.ENCRYPTED_SECRETS_PATH
 
 class Command(BaseCommand):
-    help = 'Initialize django-secrets install by generating a master key file.'
+    help = 'Initialize django-encrypted-secrets install by generating a master key file.'
 
     def handle(self, *args, **options):
         self.key = secrets.token_urlsafe(256)

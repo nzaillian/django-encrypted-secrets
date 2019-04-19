@@ -1,19 +1,19 @@
-# django-secrets
+# django-encrypted-secrets
 
-`django-secrets` brings Rails-style [encrypted credentials](https://edgeguides.rubyonrails.org/security.html#custom-credentials) to the [Django web framework](https://www.djangoproject.com/).
+`django-encrypted-secrets` brings Rails-style [encrypted credentials](https://edgeguides.rubyonrails.org/security.html#custom-credentials) to the [Django web framework](https://www.djangoproject.com/).
 
 ## Installation
 
-To install `django-secrets`, first pip install the module:
+To install `django-encrypted-secrets`, first pip install the module:
 
-    $ pip install django-secrets
+    $ pip install django-encrypted-secrets
 
 
-Add `django_secrets` to INSTALLED_APPS in your django settings file:
+Add `encrypted_secrets` to INSTALLED_APPS in your django settings file:
 
     INSTALLED_APPS = [
         ...
-        'django_secrets'
+        'encrypted_secrets'
     ]
 
 Finally, you must call `load_secrets()` from within your `manage.py` and `wsgi.py` files:
@@ -23,7 +23,7 @@ Finally, you must call `load_secrets()` from within your `manage.py` and `wsgi.p
 #!/usr/bin/env python
 import os
 import sys
-from django_secrets import load_secrets
+from encrypted_secrets import load_secrets
 
 if __name__ == "__main__":
     load_secrets()
@@ -46,7 +46,7 @@ When you save the file in your editor, its contents are encrypted and used to ov
 Finally, to read secrets within your codebase, use the `get_secret` utility:
 
 ```
-from django_secrets import get_secret
+from encrypted_secrets import get_secret
 
 # ...
 

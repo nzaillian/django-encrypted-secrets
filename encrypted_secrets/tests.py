@@ -1,7 +1,7 @@
 import os, glob
 from django.test import TestCase
-import django_secrets.conf as secrets_conf
-from django_secrets.util import *
+import encrypted_secrets.conf as secrets_conf
+from encrypted_secrets.util import *
 
 TMP_PATH = f'{os.getcwd()}/test_tmp'
 
