@@ -33,7 +33,7 @@ if __name__ == "__main__":
 
 ## Usage
 
-Django Secrets works by using a key (stored locally in `master.key` file or read from the environment variable `DJANGO_MASTER_KEY`) and reading/writing secrets to the encrypted file `secrets.yml.enc`.
+`django-encrypted-secrets` works by using a key (stored locally in `master.key` file or read from the environment variable `DJANGO_MASTER_KEY`) and reading/writing secrets to the encrypted file `secrets.yml.enc`.
 
     ./manage.py init_secrets
 
