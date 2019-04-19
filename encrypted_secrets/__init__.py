@@ -10,7 +10,11 @@ class SecretsManager():
         if not secrets_yaml:
             return False
         secrets_object = load(secrets_yaml, Loader=FullLoader)
-        SecretsManager.secrets = secrets_object
+
+        if secrets_object is None:
+            SecretsManager.secrets = {}
+        else:
+            SecretsManager.secrets = secrets_object
 
     @staticmethod
     def write_secrets(secrets_obj):

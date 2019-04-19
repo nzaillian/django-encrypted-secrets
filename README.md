@@ -53,3 +53,9 @@ from encrypted_secrets import get_secret
 secret_api_key = get_secret("secret_api_key")
 
 ````
+
+You should always keep your `master.key` file `.gitignored`.
+
+## Production considerations
+
+`django-encrypted-secrets` looks for the encrypted secrets file within the current working directory from which you execute management commands (using `os.getcwd()`). This is implicitly the project root directory. Depending on your production server configuration, `os.getcwd()` may not actully return the project root. For production, we therefore recommend you explicitly set a `DJANGO_SECRETS_ROOT` environment variable pointing to the project root to hint to `django-encrypted-secrets` where it should look for the encrypted secrets file.
