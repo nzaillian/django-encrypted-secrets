@@ -8,9 +8,20 @@ class YAMLFormatException(Exception):
 
 class SecretsManager():
     secrets = {}
+    mode = 'yaml'
 
-    @staticmethod
-    def load(encrypted_secrets_file_path=secrets_conf.ENCRYPTED_SECRETS_PATH, key=secrets_conf.ENCRYPTED_SECRETS_KEY):
+    @classmethod
+    def load(cls, encrypted_secrets_file_path=secrets_conf.ENCRYPTED_SECRETS_PATH, key=secrets_conf.ENCRYPTED_SECRETS_KEY, **kwargs):
+        if kwargs.get('env_mode') == True:
+            cls.mode = 'env'
+
+        if cls.mode == 'yaml':
+            cls.load_from_yaml(encrypted_secrets_file_path, key)
+        elif cls.mode == 'env':
+            cls.load_from_env_file(encrypted_secrets_file_path, key)
+
+    @classmethod
+    def load_from_yaml(cls, encrypted_secrets_file_path, key):
         secrets_yaml = read_secrets(encrypted_secrets_file_path, key)
         if not secrets_yaml:
             return False
@@ -18,29 +29,33 @@ class SecretsManager():
         try:
             secrets_object = load(secrets_yaml, Loader=FullLoader)
         except yaml.YAMLError:
-            SecretsManager._raise_invalid_syntax()
+            cls._raise_invalid_syntax()
         if isinstance(secrets_object, str):
-            SecretsManager._raise_invalid_syntax()
+            cls._raise_invalid_syntax()
 
         if secrets_object is None:
-            SecretsManager.secrets = {}
+            cls.secrets = {}
         else:
-            SecretsManager.secrets = secrets_object
+            cls.secrets = secrets_object
 
-    @staticmethod
-    def write_secrets(secrets_obj):
-        SecretsManager.secrets = secrets_obj
+    @classmethod
+    def load_from_env_file(cls, encrypted_secrets_file_path, key):
+        pass
 
-    @staticmethod
-    def get_secret(key, default=None):
-        return SecretsManager.secrets.get(key, default)
+    @classmethod
+    def write_secrets(cls,secrets_obj):
+        cls.secrets = secrets_obj
+
+    @classmethod
+    def get_secret(cls, key, default=None):
+        return cls.secrets.get(key, default)
 
     @staticmethod
     def _raise_invalid_syntax(error_message=None):
         raise YAMLFormatException("Invalid YAML syntax detected in secrets file. Please double-check syntax.")
 
-def load_secrets():
-    SecretsManager.load()
+def load_secrets(**kwargs):
+    SecretsManager.load(**kwargs)
 
 def get_secret(key, default=None):
     return SecretsManager.get_secret(key, default)
