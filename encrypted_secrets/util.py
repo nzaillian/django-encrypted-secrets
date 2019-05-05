@@ -13,9 +13,10 @@ def parse_env_string(env_string):
     result = {}
 
     for line in env_string.splitlines():
-        match = envre.match(line)
-        if match is not None:
-            result[match.group(1)] = match.group(2)
+        if not line.startswith('#'):
+            match = envre.match(line)
+            if match is not None:
+                result[match.group(1)] = match.group(2)
 
     return result
 
