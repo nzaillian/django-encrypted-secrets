@@ -44,7 +44,7 @@ class SecretsTestCases(TestCase):
             with self.assertRaises(YAMLFormatException):
                 SecretsManager.load(encrypted_yaml_path, TEST_KEY)
 
-    def test_env_mode(self):
+    def test_env_mode_loading(self):
         secrets_file_path = f'{TMP_PATH}/secrets.env.enc'
         with open(f"{ROOT}/encrypted_secrets/test_fixtures/valid_env.env", "r") as valid_env_file:
             encrypted_env_path = f"{ROOT}/test_tmp/valid_encrypted_env.env"
@@ -54,3 +54,10 @@ class SecretsTestCases(TestCase):
             self.assertEqual(os.environ.get('KEY_1'), 'value_1')
             self.assertEqual(os.environ.get('KEY_2'), '123')
 
+    def test_env_mode_does_not_override_existing_environment_variables(self):
+        SecretsManager.mode = 'env'
+        os.environ['EXISTING_KEY'] = "existing value"
+        encrypted_env_path = f"{ROOT}/test_tmp/encrypted_env.env"
+        write_secrets('EXISTING_KEY="attempted override value"', TEST_KEY, encrypted_env_path)
+        SecretsManager.load(encrypted_env_path, TEST_KEY, env_mode=True)
+        self.assertEqual(os.environ['EXISTING_KEY'], 'existing value')

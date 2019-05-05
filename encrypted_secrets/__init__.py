@@ -55,7 +55,8 @@ class SecretsManager():
 
     @classmethod
     def _merge_into_env(cls, key, val):
-        os.environ[key] = val
+        if key not in os.environ:
+            os.environ[key] = val
 
     @classmethod
     def write_secrets(cls,secrets_obj):

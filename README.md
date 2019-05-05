@@ -78,12 +78,19 @@ You must also pass the `--mode=env` flag to the `init_secrets` management comman
 $ ./manage.py init_secrets --mode=env
 ```
 
-A template encrypted dotenv-type file will be written to `secrets.env.enc`. When using env mode, secrets are automatically merged into the environment. This means that, in addition to being able to read secrets using the `get_secret` helper method, you may also read them as ordinary environment variables:
+A template encrypted dotenv-type file will be written to `secrets.env.enc`. When using env mode, secrets are automatically added to the environment. This means that, in addition to being able to read secrets using the `get_secret` helper method, you may also read them as ordinary environment variables. If an environment variable configured in the file already exists in the environment, it will *not* be overriden. This is because we assume that you may want to override variables from `django-encrypted-secrets` with environment variables set in your deployment environment.
+
+Example of reading environment variables directly from the environment and using `get_secret`:
 
 ```
 import os
+from encrypted_secrets import get_secret
 
+# option 1 - read directly from the environment:
 secret_api_key = os.environ.get('SECRET_API_KEY')
+
+# option 2 - use get_secret:
+secret_api_key = get_secret("SECRET_API_KEY")
 ```
 
 ## Production considerations
