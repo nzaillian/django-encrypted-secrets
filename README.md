@@ -56,6 +56,36 @@ secret_api_key = get_secret("secret_api_key")
 
 You should always keep your `master.key` file `.gitignored`.
 
+## env mode (experimental)
+
+`django-encrypted-secrets` experimentally supports loading key-value pairs from an encrypted file written in the [dotenv](https://github.com/theskumar/python-dotenv) format directly into the environment. To use this style of variable loading, you must pass `env_mode=True` to your `load_secrets` call in `manage.py` and `wsgi.py`:
+
+```
+#!/usr/bin/env python
+import os
+import sys
+from encrypted_secrets import load_secrets
+
+if __name__ == "__main__":
+    load_secrets(env_mode=True) # <- important
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "yourapp.settings")
+    # ...
+```
+
+You must also pass the `--mode=env` flag to the `init_secrets` management command when initializing `django-encrypted-secrets`:
+
+```
+$ ./manage.py init_secrets --mode=env
+```
+
+A template encrypted dotenv-type file will be written to `secrets.env.enc`. When using env mode, secrets are automatically merged into the environment. This means that, in addition to being able to read secrets using the `get_secret` helper method, you may also read them as ordinary environment variables:
+
+```
+import os
+
+secret_api_key = os.environ.get('SECRET_API_KEY')
+```
+
 ## Production considerations
 
 `django-encrypted-secrets` looks for the encrypted secrets file within the current working directory from which you execute management commands (using `os.getcwd()`). This is implicitly the project root directory. Depending on your production server configuration, `os.getcwd()` may not actully return the project root. For production, we therefore recommend you explicitly set a `DJANGO_SECRETS_ROOT` environment variable pointing to the project root to hint to `django-encrypted-secrets` where it should look for the encrypted secrets file.
