@@ -1,12 +1,13 @@
 from .util import read_secrets
 from yaml import load, FullLoader
+import encrypted_secrets.conf as secrets_conf
 
 class SecretsManager():
     secrets = {}
 
     @staticmethod
-    def load():
-        secrets_yaml = read_secrets()
+    def load(encrypted_secrets_file_path=secrets_conf.ENCRYPTED_SECRETS_PATH, key=secrets_conf.ENCRYPTED_SECRETS_KEY):
+        secrets_yaml = read_secrets(encrypted_secrets_file_path, key)
         if not secrets_yaml:
             return False
         secrets_object = load(secrets_yaml, Loader=FullLoader)

@@ -4,8 +4,8 @@ import subprocess
 import encrypted_secrets.conf as secrets_conf
 from encrypted_secrets.crypto.aes import AESCipher
 
-def write_secrets(message, key=secrets_conf.ENCRYPTED_SECRETS_KEY):
-    with open(secrets_conf.ENCRYPTED_SECRETS_PATH, 'w') as encrypted_secrets_file:
+def write_secrets(message, key=secrets_conf.ENCRYPTED_SECRETS_KEY, encrypted_secrets_path=secrets_conf.ENCRYPTED_SECRETS_PATH):
+    with open(encrypted_secrets_path, 'w') as encrypted_secrets_file:
         cipher = AESCipher(message, key)
         encrypted = cipher.encrypt()
         encrypted_secrets_file.write(encrypted)
