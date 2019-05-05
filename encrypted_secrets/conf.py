@@ -15,3 +15,13 @@ else:
 ENCRYPTED_SECRETS_KEY = os.environ.get('DJANGO_MASTER_KEY', ENCRYPTED_SECRETS_KEY)
 
 ENCRYPTED_SECRETS_PATH = f'{SECRETS_ROOT}/secrets.yml.enc'
+
+encrypted_file_exists = os.path.isfile(ENCRYPTED_SECRETS_PATH)
+
+if not encrypted_file_exists:
+    encrypted_env_file_path = f'{SECRETS_ROOT}/secrets.env.enc'
+
+    encrypted_env_file_exists = os.path.isfile(encrypted_env_file_path)
+
+    if encrypted_env_file_exists:
+        ENCRYPTED_SECRETS_PATH = encrypted_env_file_path
