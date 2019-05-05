@@ -5,6 +5,9 @@ import subprocess
 import encrypted_secrets.conf as secrets_conf
 from encrypted_secrets.crypto.aes import AESCipher
 
+def detect_mode(**kwargs):
+    pass
+
 def parse_env_string(env_string):
     envre = re.compile(r'''^([^\s=]+)=(?:[\s"']*)(.+?)(?:[\s"']*)$''')
     result = {}

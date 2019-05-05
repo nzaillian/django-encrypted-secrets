@@ -52,4 +52,5 @@ class SecretsTestCases(TestCase):
             write_secrets(env_str, TEST_KEY, encrypted_env_path)
             SecretsManager.load(encrypted_env_path, TEST_KEY, env_mode=True)
             self.assertEqual(os.environ.get('KEY_1'), 'value_1')
+            self.assertEqual(os.environ.get('KEY_2'), '123')
 

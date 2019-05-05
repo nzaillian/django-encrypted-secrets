@@ -4,7 +4,7 @@ import sys
 from encrypted_secrets import load_secrets
 
 if __name__ == "__main__":
-    load_secrets()
+    load_secrets(env_mode=True)
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dummy.settings")
     try:
         from django.core.management import execute_from_command_line
