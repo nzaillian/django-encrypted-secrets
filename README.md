@@ -1,6 +1,9 @@
 # django-encrypted-secrets
 
-`django-encrypted-secrets` brings Rails-style [encrypted credentials](https://edgeguides.rubyonrails.org/security.html#custom-credentials) to the [Django web framework](https://www.djangoproject.com/).
+[![CircleCI](https://img.shields.io/circleci/project/github/nzaillian/django-encrypted-secrets/development.svg?style=popout)](https://circleci.com/gh/nzaillian/django-encrypted-secrets/tree/development) [![Django Versions](https://img.shields.io/pypi/djversions/django-encrypted-secrets.svg?style=popout)](https://www.djangoproject.com/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/django-encrypted-secrets.svg?color=rgb%2868%2C%20204%2C%2017%29&style=popout)](https://www.python.org)
+
+`django-encrypted-secrets` brings [Rails-style credential encryption](https://edgeguides.rubyonrails.org/security.html#custom-credentials) to the [Django web framework](https://www.djangoproject.com/).
 
 ## Installation
 
