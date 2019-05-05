@@ -3,7 +3,7 @@ from yaml import load, FullLoader
 from django.test import TestCase
 import encrypted_secrets.conf as secrets_conf
 from encrypted_secrets.util import *
-from encrypted_secrets import SecretsManager, get_secret
+from encrypted_secrets import SecretsManager, get_secret, YAMLFormatException
 
 ROOT = os.getcwd()
 TMP_PATH = f'{ROOT}/test_tmp'
@@ -34,5 +34,10 @@ class SecretsTestCases(TestCase):
             self.assertEqual(get_secret('key_1'), 'value1')
 
     def test_read_invalid_yaml(self):
-        pass
+        with open(f"{ROOT}/encrypted_secrets/test_fixtures/invalid_yaml.yml", "r") as invalid_yaml_file:
+            encrypted_yaml_path = f"{ROOT}/test_tmp/valid_encrypted_secrets.yml"
+            yaml = invalid_yaml_file.read()
+            write_secrets(yaml, TEST_KEY, encrypted_yaml_path)
+            with self.assertRaises(YAMLFormatException):
+                SecretsManager.load(encrypted_yaml_path, TEST_KEY)
 
