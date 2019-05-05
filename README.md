@@ -90,7 +90,7 @@ from encrypted_secrets import get_secret
 secret_api_key = os.environ.get('SECRET_API_KEY')
 
 # option 2 - use get_secret:
-secret_api_key = get_secret("SECRET_API_KEY")
+secret_api_key = get_secret('SECRET_API_KEY')
 ```
 
 ## Production considerations
