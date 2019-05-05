@@ -1,8 +1,20 @@
 import os
 import tempfile
+import re
 import subprocess
 import encrypted_secrets.conf as secrets_conf
 from encrypted_secrets.crypto.aes import AESCipher
+
+def parse_env_string(env_string):
+    envre = re.compile(r'''^([^\s=]+)=(?:[\s"']*)(.+?)(?:[\s"']*)$''')
+    result = {}
+
+    for line in env_string.splitlines():
+        match = envre.match(line)
+        if match is not None:
+            result[match.group(1)] = match.group(2)
+
+    return result
 
 def write_secrets(message, key=secrets_conf.ENCRYPTED_SECRETS_KEY, encrypted_secrets_path=secrets_conf.ENCRYPTED_SECRETS_PATH):
     with open(encrypted_secrets_path, 'w') as encrypted_secrets_file:

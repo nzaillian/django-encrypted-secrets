@@ -1,4 +1,5 @@
-from .util import read_secrets
+from .util import read_secrets, parse_env_string
+import os
 import yaml
 from yaml import load, FullLoader
 import encrypted_secrets.conf as secrets_conf
@@ -40,7 +41,21 @@ class SecretsManager():
 
     @classmethod
     def load_from_env_file(cls, encrypted_secrets_file_path, key):
-        pass
+        env_string = read_secrets(encrypted_secrets_file_path, key)
+
+        if not env_string:
+            return False
+
+        secrets_obj = parse_env_string(env_string)
+        cls.secrets = secrets_obj
+
+        # merge secrets into ENV:
+        for k, v in secrets_obj.items():
+            cls._merge_into_env(k, v)
+
+    @classmethod
+    def _merge_into_env(cls, key, val):
+        os.environ[key] = val
 
     @classmethod
     def write_secrets(cls,secrets_obj):

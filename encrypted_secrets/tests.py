@@ -45,5 +45,11 @@ class SecretsTestCases(TestCase):
                 SecretsManager.load(encrypted_yaml_path, TEST_KEY)
 
     def test_env_mode(self):
-        SecretsManager.load(env_mode=True)
+        secrets_file_path = f'{TMP_PATH}/secrets.env.enc'
+        with open(f"{ROOT}/encrypted_secrets/test_fixtures/valid_env.env", "r") as valid_env_file:
+            encrypted_env_path = f"{ROOT}/test_tmp/valid_encrypted_env.env"
+            env_str = valid_env_file.read()
+            write_secrets(env_str, TEST_KEY, encrypted_env_path)
+            SecretsManager.load(encrypted_env_path, TEST_KEY, env_mode=True)
+            self.assertEqual(os.environ.get('KEY_1'), 'value_1')
 
