@@ -1,4 +1,4 @@
-# django-encrypted-secrets
+<h1 style="display: flex;align-items: center;"><img src="https://github.com/nzaillian/django-encrypted-secrets/blob/master/assets/logo.png?raw=true" style="width:64px;height:64px;margin-right:14px;"/> django-encrypted-secrets</h1>
 
 [![CircleCI](https://img.shields.io/circleci/project/github/nzaillian/django-encrypted-secrets/development.svg?style=popout)](https://circleci.com/gh/nzaillian/django-encrypted-secrets/tree/development) [![Django Versions](https://img.shields.io/pypi/djversions/django-encrypted-secrets.svg?style=popout)](https://www.djangoproject.com/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/django-encrypted-secrets.svg?color=rgb%2868%2C%20204%2C%2017%29&style=popout)](https://www.python.org)
