@@ -7,10 +7,12 @@ decorator==4.4.0
 Django==2.2
 django-extensions==2.1.6
 docutils==0.14
+entrypoints==0.3
 idna==2.8
 ipython==7.4.0
 ipython-genutils==0.2.0
 jedi==0.13.3
+keyring==19.0.1
 parso==0.4.0
 pexpect==4.7.0
 pickleshare==0.7.5
@@ -18,7 +20,7 @@ pkginfo==1.5.0.1
 prompt-toolkit==2.0.9
 ptyprocess==0.6.0
 pyaes==1.6.1
-pycrypto==2.6.1
+pycryptodome==3.9.0
 Pygments==2.3.1
 pytz==2019.1
 PyYAML==5.1

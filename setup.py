@@ -36,7 +36,7 @@ setup(
         "Programming Language :: Python :: 3 :: Only",
     ],
     install_requires=[
-        'PyCrypto',
+        'PyCryptodome',
         'PyYAML'
     ],
 )
