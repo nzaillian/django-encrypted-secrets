@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-encrypted-secrets',
-    version='0.9.5',
+    version='0.9.6',
     packages=find_packages(),
     author='Axiomatic LLC',
     author_email='contact@axiomatic.im',
@@ -36,7 +36,7 @@ setup(
         "Programming Language :: Python :: 3 :: Only",
     ],
     install_requires=[
-        'PyCrypto',
+        'PyCryptodome',
         'PyYAML'
     ],
 )
