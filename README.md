@@ -26,6 +26,7 @@ Add `encrypted_secrets` to INSTALLED_APPS in your django settings file:
 Finally, you must call `load_secrets()` from within your `manage.py` and `wsgi.py` files:
 
 
+`wsgi.py:`
 ```
 #!/usr/bin/env python
 import os
@@ -36,6 +37,18 @@ if __name__ == "__main__":
     load_secrets()
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "yourapp.settings")
     # ...
+```
+`manage.py:`
+```
+from encrypted_secrets import load_secrets, YAMLFormatException
+
+try:
+    load_secrets()
+except YAMLFormatException:
+    print("\n\n\nMALFORMED YAML IN ENCRYPTED SECRETS\n\n\n")
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "yourapp.settings")
+# ...
 ```
 
 ## Usage
