@@ -112,6 +112,9 @@ secret_api_key = os.environ.get('SECRET_API_KEY')
 # option 2 - use get_secret:
 secret_api_key = get_secret('SECRET_API_KEY')
 ```
+## Development workflow
+
+To work on/contribute to this library, fork the project (if you will be contributing back changes), then pull down both the master and the [development branch](https://github.com/nzaillian/django-encrypted-secrets/tree/development). The development branch keeps close parity with the master branch but has a "dummy" django project in it, along with requirements.txt files and some other supporting files so that you can actually run commands (`init_secrets`, `edit_secrets` etc.) within it (first run `pip install -r requirements.txt` to install any necessary dependencies). Any updates or fixes you make, you can bring back into your fork's master branch. You may wish to do this somewhat manually as many of the supporting files (such as the "dummy" project) in the development branch we want to keep out of master, and they may get auto-merged otherwise. Then feel free to open a pull request on the main repository (https://github.com/nzaillian/django-encrypted-secrets).
 
 ## Production considerations
 
