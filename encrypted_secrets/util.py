@@ -29,7 +29,8 @@ def write_secrets(message, key=secrets_conf.ENCRYPTED_SECRETS_KEY, encrypted_sec
 def read_secrets(encrypted_secrets_file_path=secrets_conf.ENCRYPTED_SECRETS_PATH, key=secrets_conf.ENCRYPTED_SECRETS_KEY):
     key_file_exists = os.path.isfile(encrypted_secrets_file_path)
 
-    if not key_file_exists:
+    # To handle first-run of init_secrets command when key is not yet set:
+    if key is None or not key_file_exists:
         return False
 
     with open(encrypted_secrets_file_path, 'r') as encrypted_secrets_file:
