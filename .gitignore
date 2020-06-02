@@ -93,6 +93,7 @@ cf_private_key.pem
 .vscode/*
 
 secrets.yml.enc
+secrets.env.enc
 master.key
 
 test_tmp/*
